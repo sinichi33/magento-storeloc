@@ -1,0 +1,9 @@
+<layout>
+
+    <store_index_index>
+        <reference name="content">
+            <block type="core/template" name="store" template="vivere_store/store.phtml"/>
+        </reference>
+    </store_index_index>
+
+</layout>

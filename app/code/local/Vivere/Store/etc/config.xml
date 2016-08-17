@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+		<config>
+
+			<global>
+
+				<modules>
+
+					<Vivere_Store>
+
+							<version>0.1.0</version>
+
+					</Vivere_Store>
+
+				</modules>
+
+				<blocks>
+                     <store>
+						<rewrite>
+							<store>Vivere_Store_Block</store>
+						</rewrite>
+					</store>
+				</blocks>
+				<models>
+					  <store>
+						<class>Vivere_Store_Model</class>
+						<resourceModel>store_mysql4</resourceModel>
+					  </store>
+					  <store_mysql4>
+						<class>Vivere_Store_Model_Mysql4</class>
+						<entities>		  
+							  <location>
+				                    <table>vivere_store_location</table><!-- Table name -->
+				               </location>
+				        </entities>
+					  </store_mysql4>
+					</models>
+					<resources>
+					  <store_setup>
+						<setup>
+						  <module>Vivere_Store</module>
+						</setup>
+						<connection>
+						  <use>core_setup</use>
+						</connection>
+					  </store_setup>
+					  <store_write>
+						<connection>
+						  <use>core_write</use>
+						</connection>
+					  </store_write>
+					  <store_read>
+						<connection>
+						  <use>core_read</use>
+						</connection>
+					  </store_read>
+					</resources>
+			</global>
+
+			<frontend>
+
+				<routers>
+
+			            <!-- harbolnas front -->
+			            <store>
+			                <use>standard</use>
+			                <args>
+			                    <module>Vivere_Store</module>
+			                    <frontName>store</frontName>
+			                </args>
+			            </store>
+
+			        </routers>
+
+	            <layout>
+			            <updates>
+			                <!-- Add new menu -->
+			                <vivere_store module="Vivere_Store">
+			                    <file>vivere_store.xml</file>
+			                </vivere_store>
+			            </updates>
+			    </layout>
+
+			</frontend>
+
+		</config>
+

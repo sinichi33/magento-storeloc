@@ -1,0 +1,87 @@
+        <?php 
+
+        //array data
+        $storedat = Mage::registry('storedat');
+        $otherdat = Mage::registry('otherdat');
+
+        if ($storedat[0][name] != '') { 
+
+        ?>
+
+        <h2><b>The Nearest Vivere Store to You is <?php echo $storedat[0][name]; ?></b></h2>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+        <iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=<?php echo $storedat[0][lat].','.$storedat[0][lon]; ?>&hl=en;z=14&amp;output=embed"></iframe><br />
+
+        <br />
+        <br />
+            </div>
+          </div>
+
+        
+            <div class="row">
+              <div class="col-md-4">
+                <?php echo '<h3><b>'.$storedat[0][name].'</b> Store.</h3>'; ?>
+                 <img src="/media/<?php echo $storedat[0][img]; ?>" height="207" width="350" />
+              </div>
+               <div class="col-md-4" style ="padding-top:40px;padding-bottom:20px;">
+        <?php
+
+         echo '<b><h2>'.$storedat[0][name].'</h2></b>';
+         echo $storedat[0][address];
+
+        ?>
+
+           </div>
+          </div>
+
+          <?php } 
+
+           if ($storedat[0][name] == '') {
+            echo '<h1><b>All of Vivere Stores</b></h1>'; 
+            $map=1;
+
+          }
+
+           else {
+            echo '<br /><br /><h2><b>The Other Vivere Stores</b></h2>';
+           }
+         
+
+           foreach($otherdat as $result) {
+
+           if ($result['name'] == $storedat[0][name]) { 
+            continue;
+           }
+
+            echo '<div class="row">';
+           
+            if ($map == 1) {
+            echo '<div class="col-md-4" style="padding-bottom:10px;">';
+            echo '<b><h2>'.$result['name'].' Map</h2></b>';
+            echo '<iframe width="350" height="207" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q='.$result['lat'].','.$result['lon'].'&hl=en;z=14&amp;output=embed"></iframe>';
+
+            echo '</div>';
+
+            }
+
+            echo '<div class="col-md-4">';
+            echo '<b><h3>'.$result['name'].'</h3></b>';
+            echo '<img src=/media/'.$result['img'].' height="207" width="350" style="margin-bottom:5px"/>';
+
+            echo '</div>';
+
+            echo '<div class="col-md-4" style ="padding-top:30px;padding-bottom:20px;">';
+
+            echo '<b><h2>'.$result['name'].'</h2></b>';
+            echo $result['address'];
+            echo '<br />';
+
+            echo '</div></div><br />';
+          } 
+          ?>
+
+
+        </div>
+     
